@@ -66,7 +66,7 @@ $query = mysqli_query($con, $sql);
 </table>
 
 <div>
-
+<a href="formulario.php"><button style="background-color: #008CBA; color: white; padding: 10px 20px; border: none; cursor: pointer;">Agregar Alumno</button></a>
 
 
 <div>
@@ -85,10 +85,6 @@ $query = mysqli_query($con, $sql);
 
     <input style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; cursor: pointer;" type="submit" value="Agregar Alumno">
     </div>
-    
-
-
-   
 </form>
 
 </body>
