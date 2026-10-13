@@ -24,16 +24,36 @@ $query = mysqli_query($con, $sql);
 <body>
 
 
+<div>
 
 <div>
-<table border="2">
+
+<h1>Formulario de Alumnos</h1>
+
+
+<form action="insertar.php" method="POST" style="display: flex; gap: 10px;">
+    <div  style= display: flex; gap: 10px; >
+        
+    <input type="text" name="matricula" placeholder="Matricula">
+    <input type="text" name="nombre" placeholder="Nombre">
+    <input type="text" name="apellido_p" placeholder="Apellido Paterno">  
+    <input type="text" name="apellido_m" placeholder="Apellido Materno">
+    <input type="number" name="edad" placeholder="Edad">
+
+    <input style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; cursor: pointer;" type="submit" value="Agregar Alumno">
+    </div>
+</form>
+
+
+<div>
+<table border="2" style="border-collapse: collapse; width: 100%; text-align: center; margin-top: 20px; background-color: #ffffca">
     <thead>
         <tr>
             <th>Matricula</th>
             <th>Nombre</th>
             <th>Apellido Paterno</th>
             <th>Apellido Materno</th>
-            <th>Acciones</th>
+            <th>Edad</th>
         </tr>
     </thead>
 
@@ -52,8 +72,10 @@ $query = mysqli_query($con, $sql);
             <td><?php echo $row['apellido_m']; ?></td>
             <td><?php echo $row['edad']; ?></td>
             <td>
-                <button style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; cursor: pointer;">Editar</button>
-                <button style="background-color: #f44336; color: white; padding: 10px 20px; border: none; cursor: pointer;">Eliminar</button>
+                <a href="editar.php?matricula=<?php echo $row['matricula']; ?>" style="background-color: #158c00; color: white; cursor: pointer">EDITAR</a>
+                <br>
+                <hr>
+                <a href="eliminar.php?matricula=<?php echo $row['matricula']; ?>" style="background-color: #900a00; color: white; cursor: pointer">Eliminar</a>
             </td>
             </tr>
             <?php
@@ -64,28 +86,6 @@ $query = mysqli_query($con, $sql);
 
             </tbody>
 </table>
-
-<div>
-<a href="formulario.php"><button style="background-color: #008CBA; color: white; padding: 10px 20px; border: none; cursor: pointer;">Agregar Alumno</button></a>
-
-
-<div>
-
-<h1>Formulario de Alumnos</h1>
-
-
-<form action="insertar.php" method="POST">
-    <div  style= display: flex; gap: 10px; >
-        
-    <input type="text" name="matricula" placeholder="Matricula">
-    <input type="text" name="nombre" placeholder="Nombre">
-    <input type="text" name="apellido_p" placeholder="Apellido Paterno">  
-    <input type="text" name="apellido_m" placeholder="Apellido Materno">
-    <input type="edad" name="edad" placeholder="Edad">
-
-    <input style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; cursor: pointer;" type="submit" value="Agregar Alumno">
-    </div>
-</form>
 
 </body>
 </html>

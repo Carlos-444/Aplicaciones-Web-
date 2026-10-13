@@ -21,7 +21,7 @@ $sql = "INSERT INTO alumnos (matricula, nombre, apellido_p, apellido_m, edad)
 $query = mysqli_query($con, $sql);
 
 if($query){
-    header(Location:alumnos.php);
+    header("Location: alumnos.php");
 }
 else{
     echo" Error al insertar el registro";
