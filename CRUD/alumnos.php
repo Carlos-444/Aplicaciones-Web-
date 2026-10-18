@@ -77,6 +77,8 @@ $query = mysqli_query($con, $sql);
                 <hr>
                 <a href="eliminar.php?matricula=<?php echo $row['matricula']; ?>" style="background-color: #900a00; color: white; cursor: pointer">Eliminar</a>
             </td>
+
+            
             </tr>
             <?php
         }
