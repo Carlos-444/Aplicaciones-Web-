@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+</head>
+<body class="bg-base-200 min-h-screen flex items-center justify-center p-4">
+
+    <div class="card w-full max-w-md bg-base-100 shadow-xl border border-base-300">
+        <div class="card-body">
+            <h2 class="card-title text-2xl font-bold justify-center mb-4">Registro de Usuario</h2>
+
+            <form action="/registro" method="POST" class="space-y-3">  
+                <div>
+                    <label class="label">
+                        <span class="label-text font-semibold">Nombre:</span>
+                    </label>
+                    <input type="text" name="nombre" placeholder="Nombre" class="input input-bordered w-full" required>
+                </div>
+
+                <div>
+                    <label class="label">
+                        <span class="label-text font-semibold">Apellido Paterno:</span>
+                    </label>
+                    <input type="text" name="apellido_p" placeholder="Apellido Paterno" class="input input-bordered w-full" required>
+                </div>
+
+                <div>
+                    <label class="label">
+                        <span class="label-text font-semibold">Apellido Materno:</span>
+                    </label>
+                    <input type="text" name="apellido_m" placeholder="Apellido Materno" class="input input-bordered w-full" required>
+                </div>
+
+                <div>
+                    <label class="label">
+                        <span class="label-text font-semibold">Correo:</span>
+                    </label>
+                    <input type="email" name="correo" placeholder="correo@ejemplo.com" class="input input-bordered w-full" required>
+                </div>
+
+                <div>
+                    <label class="label">
+                        <span class="label-text font-semibold">Contraseña:</span>
+                    </label>
+                    <input type="password" name="password" placeholder="••••••••" class="input input-bordered w-full" required>
+                </div>
+
+                <div class="pt-3">
+                    <button type="submit" class="btn btn-primary w-full">Registrarse</button>
+                </div>
+            </form>
+
+            <div class="divider">O</div>
+
+            <p class="text-center text-sm">
+                ¿Ya tienes cuenta? 
+                <a href="/" class="link link-primary font-semibold">Iniciar sesión</a>
+            </p>
+        </div>
+    </div>
+
+</body>
+</html>
+
