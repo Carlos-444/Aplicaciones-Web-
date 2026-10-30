@@ -1,5 +1,5 @@
 #importamos libreria de flask
-from flask import Flask, redirect, render_template, request, url_for
+from flask import Flask, redirect, render_template, request, url_for, session
 
 #Importar la libreria de MYSQL para flask
 from flask_mysqldb import MySQL
@@ -84,6 +84,59 @@ def registro():
         return redirect(url_for("home"))
 
     return render_template("registro.html")
+
+#ruta de login
+@app.route("/login", method= ["GET", "POST"])
+def login():
+    
+
+    if request.method == "POST":
+        correo = request.form["correo"]
+        password = request.form ["password_hash"]
+        
+        cursor = mysql.connection.cursor()
+        
+        sql = """
+        SELECT
+            usuarios.id,
+            usuarios.nombre,
+            usuarios.apellído_p,
+            usuarios.apellido_m,
+            usuarios.correo,
+            usuarios.password,
+            roles.nombre
+            FROM usuarios
+            INNER JOIN roles
+            ON usuarios.id_rol = roles.id_rol
+            WHERE usuarios.correo = %s
+
+
+
+            """
+      
+      
+      
+        cursor.execute(sql,(correo,))
+        
+        usuario = cursor.fetchone()
+        
+        cursor.close()
+        if usuario and check_password_hash(usuario[5], password):
+            
+            session["id_usuario"] = usuario[0]
+            
+            session["nombre"] = usuario[1]
+            
+            session["rol"]=usuario[6]
+            
+            if session["rol"] == "Administrador":
+                return redirect(url_for("admin"))
+            
+            return redirect(url_for("usuario"))
+        return render_template("login.html", error = "Correo o contraseña incorrectos")
+    return render_template
+
+
 
 
 if __name__ == '__main__':
