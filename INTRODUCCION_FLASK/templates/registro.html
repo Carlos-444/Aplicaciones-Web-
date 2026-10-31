@@ -1,40 +1,85 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
 </head>
 
-<body>
-    <div>
-        <h1>REGISTRO</h1>
-        <form action="/registro" method="POST">
-            <label>Nombre (s):</label>
-            <input type="text" name="nombre" required>
-            <br><br>
-            <label>Apellido Paterno:</label>
-            <input type="text" name="apellido_p" required>
-            <br><br>
-            <label>Apellido Materno</label>
-            <input type="text" name="apellido_m" required>
-            <br><br>
-            <label>Correo</label>
-            <input type="text" name="correo" required>
-            <br><br>
-            <label>Contraseña</label>
-            <input type="text" name="password_hash" required>
-            <br><br>
-            <label for="id_rol">Tipo de usuario</label>
-            <select name="id_rol" id="id_rol" required>
-                <option value="1">Administrador</option>
-                <option value="2">Usuario X</option>
-            </select>
-            <button type="submit">Registrarse</button>
-        </form>
-        <p><a href="{{url_for('login')}}">Regresar al login</a></p>
+<body class="bg-base-200 min-h-screen flex items-center justify-center p-6">
+
+    <!-- Tarjeta blanca centrada con sombra -->
+    <div class="card w-full max-w-md bg-base-100 shadow-xl border border-base-300">
+
+        <!-- Cuerpo de la tarjeta -->
+        <div class="card-body">
+
+            <h1 class="card-title text-2xl font-bold justify-center mb-2">Registro de Usuario</h1>
+
+            {% if error %}
+                <p class="text-error text-center text-sm font-semibold">{{ error }}</p>
+            {% endif %}
+
+            <form action="/registro" method="POST" class="flex flex-col gap-3">
+
+               
+                <div>
+                    <label class="label font-semibold py-1">Nombre(s):</label>
+                    <input type="text" name="nombre" placeholder="Tu nombre" required class="input input-bordered w-full">
+                </div>
+
+               
+                <div>
+                    <label class="label font-semibold py-1">Apellido Paterno:</label>
+                    <input type="text" name="apellido_p" placeholder="Primer apellido" required class="input input-bordered w-full">
+                </div>
+
+                
+                <div>
+                    <label class="label font-semibold py-1">Apellido Materno:</label>
+                    <input type="text" name="apellido_m" placeholder="Segundo apellido" required class="input input-bordered w-full">
+                </div>
+
+                
+                <div>
+                    <label class="label font-semibold py-1">Correo Electrónico:</label>
+                    <input type="email" name="correo" placeholder="correo@ejemplo.com" required class="input input-bordered w-full">
+                </div>
+
+                
+                <div>
+                    <label class="label font-semibold py-1">Contraseña:</label>
+                    <input type="password" name="password_hash" placeholder="••••••••" required class="input input-bordered w-full">
+                </div>
+
+                
+                <div>
+                    <label for="id_rol" class="label font-semibold py-1">Tipo de usuario:</label>
+                    <select name="id_rol" id="id_rol" required class="select select-bordered w-full">
+                        <option value="1">Administrador</option>
+                        <option value="2">Usuario X</option>
+                    </select>
+                </div>
+
+                
+                <button type="submit" class="btn btn-primary w-full mt-3">Registrarse</button>
+
+            </form>
+
+            <div class="divider my-2">O</div>
+
+            <p class="text-center text-sm">
+                ¿Ya tienes cuenta? 
+                <a href="{{ url_for('login') }}" class="link link-primary font-semibold">Iniciar sesión</a>
+            </p>
+
+        </div>
+
     </div>
+
 </body>
 
 </html>

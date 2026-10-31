@@ -25,12 +25,8 @@ mysql = MySQL(app)
 def home():
     return render_template("login.html")
 
-@app.route("/login")
-def login():
-    return render_template("login.html")
 
-
-@app.route("/registro", methods=("GET", "POST"))
+@app.route("/registro", methods=["GET", "POST"])
 def registro():
     if request.method == "POST":
         nombre = request.form["nombre"]
@@ -61,7 +57,7 @@ def registro():
         if cursor.fetchone():
             print("El correo ya existe en la base de datos.")
             cursor.close()
-            return render_template("registro.html")
+            return render_template("registro.html", error="El correo ya está registrado")
 
         # Guardar el usuario con su contraseña encriptada (hash_seguro)
         cursor.execute(
@@ -81,18 +77,17 @@ def registro():
         cursor.close()
         print("Usuario registrado con éxito en la base de datos.")
 
-        return redirect(url_for("home"))
+        return redirect(url_for("login"))
 
     return render_template("registro.html")
 
-#ruta de login
-@app.route("/login", method= ["GET", "POST"])
-def login():
-    
 
+#ruta de login
+@app.route("/login", methods=["GET", "POST"])
+def login():
     if request.method == "POST":
-        correo = request.form["correo"]
-        password = request.form ["password_hash"]
+        correo = request.form.get("correo") or request.form.get("Correo")
+        password = request.form.get("password_hash") or request.form.get("password")
         
         cursor = mysql.connection.cursor()
         
@@ -100,46 +95,67 @@ def login():
         SELECT
             usuarios.id,
             usuarios.nombre,
-            usuarios.apellído_p,
+            usuarios.apellido_p,
             usuarios.apellido_m,
             usuarios.correo,
-            usuarios.password,
+            usuarios.password_hash,
             roles.nombre
-            FROM usuarios
-            INNER JOIN roles
+        FROM usuarios
+        INNER JOIN roles
             ON usuarios.id_rol = roles.id_rol
-            WHERE usuarios.correo = %s
-
-
-
-            """
+        WHERE usuarios.correo = %s
+        """
       
-      
-      
-        cursor.execute(sql,(correo,))
-        
+        cursor.execute(sql, (correo,))
         usuario = cursor.fetchone()
-        
         cursor.close()
+        
         if usuario and check_password_hash(usuario[5], password):
-            
             session["id_usuario"] = usuario[0]
-            
             session["nombre"] = usuario[1]
+            session["rol"] = str(usuario[6]).strip().lower()
             
-            session["rol"]=usuario[6]
-            
-            if session["rol"] == "Administrador":
+            # Comparamos el rol en minúsculas para evitar problemas de mayúsculas
+            if "admin" in session["rol"]:
                 return redirect(url_for("admin"))
             
             return redirect(url_for("usuario"))
-        return render_template("login.html", error = "Correo o contraseña incorrectos")
-    return render_template
+            
+        return render_template("login.html", error="Correo o contraseña incorrectos")
+
+    return render_template("login.html")
 
 
+@app.route("/admin")
+def admin():
+    if "id_usuario" not in session:
+        return redirect(url_for("login"))
+    
+    if "admin" not in session.get("rol", ""):
+        return "Acceso denegado"
+    
+    return render_template("administrador.html", nombre=session.get("nombre"))
+    
+
+#ruta de usuario
+@app.route("/usuario")
+def usuario():
+    if "id_usuario" not in session:
+        return redirect(url_for("login"))
+    
+    if "admin" in session.get("rol", ""):
+        # El admin también puede ver la vista o redirigir a admin
+        pass
+    
+    return render_template("usuarios.html", nombre=session.get("nombre"))
+
+
+#ruta de logout
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect(url_for("login"))  
 
 
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
-
     app.run(port=5000, debug=True)
