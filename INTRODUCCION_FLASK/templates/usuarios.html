@@ -1,13 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Panel Usuario</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-<link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
 </head>
-<body>
-<h1>este es usuarios </h1>
+<body class="p-8">
+
+
+
+    <!-- es la tarjeta blanca con sombra -->
+    <div class="card w-full max-w-sm bg-base-100 shadow-xl border border-base-300">
+
+        <!-- cuerpo de la tarjeta -->
+        <div class="card-body">
+    <h1 class="text-3xl font-bold">Panel de Usuario</h1>
+    <p class="text-lg mt-2">Bienvenido, <strong>{{ nombre }}</strong></p>
+    <br>
+    <a href="/logout" class="btn btn-error btn-sm">Cerrar sesión</a>
+
+
+        </div>
+        </div>
+        
 </body>
 </html>

@@ -5,36 +5,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
-    <div>
+    
+
+    <!-- es la tarjeta blanca con sombra -->
+    <div class="card w-full max-w-sm bg-base-100 shadow-xl border border-base-300">
+
+        <!-- cuerpo de la tarjeta -->
+        <div class="card-body">
+    
         <h1>REGISTRO</h1>
         <form action="/registro" method="POST">
-            <label>Nombre (s):</label>
-            <input type="text" name="nombre" required>
+            <label class="text-3xl font-bold">Nombre (s):</label>
+            <input type="text" name="nombre" required class="input input-bordered w-full">
             <br><br>
-            <label>Apellido Paterno:</label>
-            <input type="text" name="apellido_p" required>
+            <label class="text-3xl font-bold">Apellido Paterno:</label>
+            <input type="text" name="apellido_p" required class="input input-bordered w-full">
             <br><br>
-            <label>Apellido Materno</label>
-            <input type="text" name="apellido_m" required>
+            <label class="text-3xl font-bold">Apellido Materno</label>
+            <input type="text" name="apellido_m" required class="input input-bordered w-full">
             <br><br>
-            <label>Correo</label>
-            <input type="text" name="correo" required>
+            <label class="text-3xl font-bold">Correo</label>
+            <input type="text" name="correo" required class="input input-bordered w-full">
             <br><br>
-            <label>Contraseña</label>
-            <input type="text" name="password_hash" required>
+            <label class="text-3xl font-bold">Contraseña</label>
+            <input type="text" name="password_hash" required class="input input-bordered w-full">
             <br><br>
-            <label for="id_rol">Tipo de usuario</label>
-            <select name="id_rol" id="id_rol" required>
+            <label for="id_rol" class="text-3xl font-bold">Tipo de usuario</label>
+            <select name="id_rol" id="id_rol" required class="input input-bordered w-full">
                 <option value="1">Administrador</option>
                 <option value="2">Usuario X</option>
             </select>
-            <button type="submit">Registrarse</button>
+            <button type="submit" class="btn btn-primary w-full">Registrarse</button>
         </form>
         <p><a href="{{url_for('login')}}">Regresar al login</a></p>
     </div>
+    </div>
+    
 </body>
 
 </html>
