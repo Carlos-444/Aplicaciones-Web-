@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Eliminar Auto</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+</head>
+<body class="bg-base-200 min-h-screen flex items-center justify-center p-6">
+
+    <!-- Tarjeta blanca centrada con sombra -->
+    <div class="card w-full max-w-md bg-base-100 shadow-xl border border-base-300">
+
+        <!-- Cuerpo de la tarjeta -->
+        <div class="card-body">
+            <h1 "card-title text-2xl font-bold justify-center mb-2">Eliminar Auto</h1>
+
+
+
+    <form action="{{ url_for('eliminar', id=auto[0]) }}" method="POST">
+        <label class="label font-semibold py-1">Id:</label><br>
+        <input class="label font-semibold py-1" type="text" value="{{ auto[0] }}" readonly><br><br>
+
+        <label class="label font-semibold py-1">Nombre / Marca:</label><br>
+        <input class="input input-bordered w-full" type="text" name="nombre" value="{{ auto[1] }}" required><br><br>
+
+        <label class="label font-semibold py-1">Modelo:</label><br>
+        <input class="input input-bordered w-full" type="text" name="modelo" value="{{ auto[2] }}" required><br><br>
+
+        <label class="label font-semibold py-1">Color:</label><br>
+        <input class="input input-bordered w-full"type="text" name="color" value="{{ auto[3] }}" required><br><br>
+
+        <label class="label font-semibold py-1">Año:</label><br>
+        <input class="input input-bordered w-full" type="number" name="ano" value="{{ auto[4] }}" required><br><br>
+        <button type="submit" class="btn btn-primary w-full mt-3">Eliminar</button>
+
+    </form>
+
+
+    </ul>
+
+
+</div>
+</div>
+
+</body>
+</html>
