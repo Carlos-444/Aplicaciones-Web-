@@ -126,15 +126,39 @@ def login():
     return render_template("login.html")
 
 
+# PANEL DE ADMINISTRADOR
 @app.route("/admin")
 def admin():
+
     if "id_usuario" not in session:
         return redirect(url_for("login"))
-    
-    if "admin" not in session.get("rol", ""):
-        return "Acceso denegado"
-    
-    return render_template("administrador.html", nombre=session.get("nombre"))
+
+    if "admin" not in str(session.get("rol", "")).lower():
+        return "Acceso denegado", 403
+
+    # CONSULTAR TODOS LOS USUARIOS
+    con = mysql.connection.cursor()
+
+    con.execute("""
+        SELECT usuarios.id,
+               usuarios.nombre,
+               usuarios.apellido_p,
+               usuarios.apellido_m,
+               usuarios.correo,
+               roles.nombre
+        FROM usuarios
+        INNER JOIN roles
+        ON usuarios.id_rol = roles.id_rol
+    """)
+
+    conUsuarios = con.fetchall()
+    con.close()
+
+    return render_template(
+        "administrador.html",
+        nombre=session["nombre"],
+        listUsers=conUsuarios
+    )
     
 
 #ruta de usuario
